@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import React, { Component } from 'react'
+import Header from './components/Header';
+import "./App.css"
+import CurrencyProvider from './context/CurrencyContext';
+import ProductPage from './components/pages/ProductPage';
+import CartProvider from './context/CartContext';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/',
+  cache: new InMemoryCache(),
+});
+export default class App extends Component {
+  state = {
+    selectedCategory: "all",
+    categories: [],
+  }
+  componentDidMount(){
+     this.getCategories()
+    }
+
+    getCategories = () => {
+      client
+      .query({
+        query: gql`
+        query Query {
+          categories {
+            name
+          }
+        }
+        `
+        
+      })
+      .then(result => this.setState({categories: result.data.categories}));
+    }
+
+    categorySelect = (event) => {
+      this.setState({selectedCategory: event.target.value})
+    }
+
+
+  render() {
+    return (
+      <CurrencyProvider>
+        <CartProvider>
+          <div className='main-page'>
+            <Header 
+            categorySelect={this.categorySelect} 
+            categories={this.state.categories}
+            />
+          <ProductPage 
+            category={this.state.selectedCategory}
+          />
+          </div>
+        </CartProvider>
+      </CurrencyProvider>
+    )
+  }
 }
+// huarache-x-stussy-le
 
-export default App;
+
+
+// const client = ...
+

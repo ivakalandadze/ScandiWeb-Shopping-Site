@@ -1,38 +1,99 @@
-.App {
-  text-align: center;
+.main-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header-box {
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 0 30px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.category {
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    border-bottom: solid 0.5px darkorange
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.category-box{
+    display: flex;
+    justify-content: space-around;
 }
 
-.App-link {
-  color: #61dafb;
+.cart-icon {
+    width:15px;
+    height: auto;
+}
+.product-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.product {
+    padding: 15px;
+    
+}
+
+.product-name {
+    grid-row-start: 2;
+}
+
+.onProduct {
+    box-shadow: 0 0 15px gray;
+    background-color: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.onItem-cart {
+    width: 45px;
+    height: 45px;
+    background-color: orange;
+    border-radius: 50%;
+    border: 0;
+    margin-left: 250px;
+    margin-top: -20px;
+    margin-bottom: -25px;
+    z-index: 3;
+}
+
+.onItem-cart-logo {
+    width: 80%
+}
+
+.img-box {
+   display: grid;
+   grid-template-columns: repeat(5, 60px);
+   grid-column-start: 1 /2;
+}
+
+
+.product-img {
+    grid-column: 1 / -1;
+    grid-row-start: 1;
+    z-index: 1;
+    width: 300px;
+    height: 300px;
+
+}
+
+.out-stock {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row-start: 1;
+    grid-column: 1 / -1;
+    background-color: white;
+    opacity: 0.5;
+    z-index: 2;
 }
