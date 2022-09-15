@@ -57,7 +57,7 @@ export default class Product extends Component {
                       {item.inStock ? <div className='out-stock'>OUT OF STOCK</div> : <Fragment></Fragment>}
                       <img src={item.gallery[0]} className="product-img"/>
                     </div>
-                    {this.state.onIt ? <button onClick={()=>addItemtoCart(item)}className='onItem-cart'><img className='onItem-cart-logo' src={logo} /></button> : <Fragment></Fragment>}
+                    {this.state.onIt ? <button onClick={()=>item.inStock ?  alert("Item out of stock"): addItemtoCart(item)}className='onItem-cart'><img className='onItem-cart-logo' src={logo} /></button> : <Fragment></Fragment>}
                     <div className='isa'>
                       <h4 className="product-name">{item.name}</h4>
                       <p>{this.state.price}</p>
