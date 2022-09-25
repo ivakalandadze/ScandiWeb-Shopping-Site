@@ -20,19 +20,22 @@ export default class Attribute extends Component {
       return (
         <CartConsumer>
           {props=>{
-            const {changeAttribute,cartItems } = props;
+            const {changeAttribute,cartItems} = props;
             const {type, id, items} = this.props.attribute;
             const itemId = this.props.itemId
-            const elementIndex = cartItems.findIndex(cartItem=>Object.keys(cartItem)[0]===id)
-            const attributeOptions = items.map((item,index)=>(
-              <button onClick={()=>changeAttribute(itemId, id, index)}>
+            const elementIndex = cartItems.findIndex(cartItem=>Object.keys(cartItem)[0]===itemId)
+            const attributeOptions = items.map((item,index)=>{
+              return(
+              <button onClick={()=>changeAttribute(itemId, id, index)}
+                className={cartItems[elementIndex][itemId].choosenAtributes[id].displayValue===item.displayValue ? "choosen-attribute" : ""}
+              >
                 {
                   type==="swatch" ? <div style={{backgroundColor:`${item.value}`}}>{`${item.displayValue}`}</div> 
                   : type==="text" ? <div>{`${item.displayValue}`}</div> 
                   : <></>
                 }
-              </button>
-           )
+              </button>)
+            }
         )
             return(
               <div>
