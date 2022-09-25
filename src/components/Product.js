@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client
 import logo from "./shopping-cart.jpg"
 import { CartConsumer } from '../context/CartContext';
 import { CurrencyConsumer } from '../context/CurrencyContext';
+import { Link } from 'react-router-dom';
 
 const client = new ApolloClient({
     uri: 'http://localhost:4000/',
@@ -53,11 +54,13 @@ export default class Product extends Component {
               const {addItemtoCart}=props;
               return(
                 <div onMouseEnter={this.toggleOnIt} onMouseLeave={this.toggleOutOnIt} className={this.state.onIt ? 'onProduct' : 'product'}>
-                    <div className='img-box'>
-                      {item.inStock ? <div className='out-stock'>OUT OF STOCK</div> : <Fragment></Fragment>}
+                    <Link to="productdetails" className='link-text'>
+                      <div className='img-box'>
+                        {item.inStock ? <div className='out-stock'>OUT OF STOCK</div> : <Fragment></Fragment>}
                       <img src={item.gallery[0]} className="product-img"/>
-                    </div>
-                    {this.state.onIt ? <button onClick={()=>item.inStock ?  alert("Item out of stock"): addItemtoCart(item)}className='onItem-cart'><img className='onItem-cart-logo' src={logo} /></button> : <Fragment></Fragment>}
+                      </div>
+                    </Link>
+                    {this.state.onIt ? <button onClick={()=>addItemtoCart(item, this.state.price)}className='onItem-cart'><img className='onItem-cart-logo' src={logo} /></button> : <Fragment></Fragment>}
                     <div className='isa'>
                       <h4 className="product-name">{item.name}</h4>
                       <p>{this.state.price}</p>
@@ -69,3 +72,4 @@ export default class Product extends Component {
     )
   }
 }
+// item.inStock ?  alert("Item out of stock"): 

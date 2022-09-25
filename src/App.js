@@ -5,6 +5,9 @@ import "./App.css"
 import CurrencyProvider from './context/CurrencyContext';
 import ProductPage from './components/pages/ProductPage';
 import CartProvider from './context/CartContext';
+import MiniCart from './components/pages/MiniCart';
+import { Route, Routes } from 'react-router-dom';
+import ProductDetails from './components/ProductDetails';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/',
@@ -48,9 +51,24 @@ export default class App extends Component {
             categorySelect={this.categorySelect} 
             categories={this.state.categories}
             />
-          <ProductPage 
-            category={this.state.selectedCategory}
-          />
+            <Routes>
+              <Route path="/" 
+                element={
+                  <ProductPage 
+                    category={this.state.selectedCategory}
+                  />
+                }
+              />
+              <Route path="cart"
+                element={
+                  <MiniCart />
+                }
+              />
+              <Route path="product"
+                element={<ProductDetails />}
+              />
+
+            </Routes>
           </div>
         </CartProvider>
       </CurrencyProvider>
