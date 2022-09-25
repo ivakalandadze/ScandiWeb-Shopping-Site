@@ -8,6 +8,7 @@ export default class InCartItem extends Component {
     <CartConsumer>
       {cart=>{
         const {changeQuantity} = cart;
+        const itemId = this.props.itemId
         const attributes = this.props.cartItem.product.attributes
         const id = this.props.cartItem.product.id
         const name = this.props.cartItem.product.name
@@ -15,7 +16,7 @@ export default class InCartItem extends Component {
         const pictureURL = this.props.cartItem.product.gallery[0]
         const count = this.props.cartItem.count
         const attributesElements = attributes.map(attribute=>{
-            return <Attribute attribute={attribute}/>
+            return <Attribute itemId={itemId} attribute={attribute}/>
         });
         return (
             

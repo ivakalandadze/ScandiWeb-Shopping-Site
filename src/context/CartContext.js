@@ -45,14 +45,21 @@ export default class CartProvider extends Component {
                 }
             })
             .then(result=>{
-              const product = result.data.product
+              const product = {...result.data.product}
+              const choosenAtributes = {}
+              product.attributes.forEach(attribute=>{
+                choosenAtributes[attribute.id] = attribute.items[0]
+              })
+              console.log(choosenAtributes["Color"])
               this.setState(prevState=>({
               cartItems:[...prevState.cartItems, {[id]:{
                 "count": 1,
                 product,
                 price,
+                choosenAtributes
               }}]
-            }))})
+            }))
+          })
     }
 
     addItemtoCart = (item,price) => {
@@ -69,7 +76,6 @@ export default class CartProvider extends Component {
 
     changeQuantity = (id,command) => {
       this.state.cartItems.map((cartItem,index)=>{
-        console.log(id,command)
         if(Object.keys(cartItem)[0]===id){
           const newQuantity = [...this.state.cartItems]
           if(command==="increase"){
@@ -81,16 +87,26 @@ export default class CartProvider extends Component {
         }
       })
     }
+    
+    changeAttribute = (id, attributeId, itemId) => {
+      const prevCartItems=[...this.state.cartItems]
+      const index = prevCartItems.findIndex(cartItem=>Object.keys(cartItem)[0]===id)
+      const attributeIndex = prevCartItems[index][id].product.attributes.findIndex(attribute=>attribute.id===attributeId)
+      const newItem = prevCartItems[index][id].product.attributes[attributeIndex].items[itemId]
+      prevCartItems[index][id].choosenAtributes[attributeId] = newItem
+      this.setState({cartItems: prevCartItems})
+    }
 
   render() {
     const {cartItems} = this.state;
-    const {addItemtoCart,changeQuantity} = this;
+    const {addItemtoCart,changeQuantity,changeAttribute} = this;
     return (
       <CartContext.Provider 
         value={{
           cartItems,
           addItemtoCart,
           changeQuantity,
+          changeAttribute
         }}
       >
         {this.props.children}

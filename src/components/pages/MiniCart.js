@@ -10,8 +10,7 @@ export default class MiniCart extends Component {
           const {cartItems} = props;
           const cartItemElements = cartItems.map(cartItem=>{
             const id = Object.keys(cartItem)[0]
-            console.log(id)
-            return <InCartItem cartItem={cartItem[id]}/>
+            return <InCartItem itemId={id} cartItem={cartItem[id]}/>
           })
           return (
             <div>
