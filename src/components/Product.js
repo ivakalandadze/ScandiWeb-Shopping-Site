@@ -3,7 +3,8 @@ import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client
 import logo from "./shopping-cart.jpg"
 import { CartConsumer } from '../context/CartContext';
 import { CurrencyConsumer } from '../context/CurrencyContext';
-import { Link } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
+import ProductDetails from './ProductDetails';
 
 const client = new ApolloClient({
     uri: 'http://localhost:4000/',
@@ -54,7 +55,7 @@ export default class Product extends Component {
               const {addItemtoCart}=props;
               return(
                 <div onMouseEnter={this.toggleOnIt} onMouseLeave={this.toggleOutOnIt} className={this.state.onIt ? 'onProduct' : 'product'}>
-                    <Link to="productdetails" className='link-text'>
+                    <Link to={`/product/${item.id}`}className='link-text'>
                       <div className='img-box'>
                         {item.inStock ? <div className='out-stock'>OUT OF STOCK</div> : <Fragment></Fragment>}
                       <img src={item.gallery[0]} className="product-img"/>

@@ -59,15 +59,15 @@ export default class App extends Component {
                   />
                 }
               />
-              <Route path="cart"
+              
+              <Route path="/cart"
                 element={
                   <MiniCart />
                 }
               />
-              <Route path="product"
+              <Route path="/product/:id"
                 element={<ProductDetails />}
               />
-
             </Routes>
           </div>
         </CartProvider>

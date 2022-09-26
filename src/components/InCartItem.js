@@ -16,7 +16,7 @@ export default class InCartItem extends Component {
         const pictureURL = this.props.cartItem.product.gallery[0]
         const count = this.props.cartItem.count
         const attributesElements = attributes.map(attribute=>{
-            return <Attribute itemId={itemId} attribute={attribute}/>
+            return <Attribute productItem ={this.props.cartItem} itemId={itemId} attribute={attribute}/>
         });
         return (
             
