@@ -17,7 +17,8 @@ export default class Attribute extends Component {
             const itemId = this.props.itemId
             const attributeOptions = items.map((item,index)=>{
               return(
-              <button onClick={()=>fromDetails ? changeAttribute(id,index) : changeAttributeInCart(itemId, id, index)  }
+              <button 
+                onClick={()=>fromDetails ? changeAttribute(id,index) : changeAttributeInCart(itemId, id, index)  }
                 className={productItem.choosenAttributes[id].displayValue===item.displayValue ? "choosen-attribute" : ""}
               >
                 {

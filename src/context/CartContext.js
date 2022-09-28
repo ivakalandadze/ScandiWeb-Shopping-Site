@@ -17,7 +17,7 @@ export default class CartProvider extends Component {
 
     
 
-    getProducts = (id,price) =>{
+    getProducts = (id,price,attributes) =>{
       client
             .query({
                 query: gql`
@@ -46,10 +46,12 @@ export default class CartProvider extends Component {
             })
             .then(result=>{
               const product = {...result.data.product}
-              const choosenAttributes = {}
-              product.attributes.forEach(attribute=>{
-                choosenAttributes[attribute.id] = attribute.items[0]
-              })
+              const choosenAttributes = attributes ? attributes : {}
+             if(!attributes) {
+                product.attributes.forEach(attribute=>{
+                  choosenAttributes[attribute.id] = attribute.items[0]
+                })
+              } 
               const defaultAttributes = {...choosenAttributes}
               this.setState(prevState=>({
               cartItems:[...prevState.cartItems, {[id]:{
@@ -64,14 +66,24 @@ export default class CartProvider extends Component {
     }
 
     addItemtoCart = (item,price) => {
+      console.log(item)
       const existingItem = this.state.cartItems.find(prevItem=>Object.keys(prevItem)[0]===item.id)
-      if(existingItem&&existingItem[item.id].choosenAtributes===existingItem[item.id].defaultAttributes){
-        // const attributesMatch = existingItem[item.id].choosenAtributes===existingItem[item.id].defaultAttributes
+      // &&existingItem[item.id].choosenAtributes===existingItem[item.id].defaultAttributes
+      if(existingItem){
+        console.log(existingItem[item.id].choosenAttributes)
+        console.log(existingItem[item.id].defaultAttributes)
+          console.log(existingItem[item.id].choosenAttributes===existingItem[item.id].defaultAttributes)
+          const attributesMatch = existingItem[item.id].choosenAttributes===existingItem[item.id].defaultAttributes
           const prevItems = [...this.state.cartItems]
           const index = this.state.cartItems.indexOf(existingItem)
           prevItems[index][item.id]["count"] ++
           this.setState({cartItems: prevItems})
       }else {
+        if(item.choosenAttributes!==item.defaultAttributes){
+          console.log("ar emtxveva")
+          this.getProducts(item.id,price,item.choosenAttributes)
+        }
+        console.log("not exists")
         this.getProducts(item.id,price)
       }
     }

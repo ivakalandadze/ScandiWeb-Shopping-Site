@@ -57,12 +57,12 @@ export default class Product extends Component {
                 <div onMouseEnter={this.toggleOnIt} onMouseLeave={this.toggleOutOnIt} className={this.state.onIt ? 'onProduct' : 'product'}>
                     <Link to={`/product/${item.id}`}className='link-text'>
                       <div className='img-box'>
-                        {item.inStock ? <div className='out-stock'>OUT OF STOCK</div> : <Fragment></Fragment>}
+                        {!item.inStock ? <div className='out-stock'>OUT OF STOCK</div> : <Fragment></Fragment>}
                       <img src={item.gallery[0]} className="product-img"/>
                       </div>
                     </Link>
                     {this.state.onIt ? 
-                    <button onClick={()=>item.inStock ?  alert("Item out of stock") : 
+                    <button onClick={()=>!item.inStock ?  alert("Item out of stock") : 
                       addItemtoCart(item, this.state.price)}
                       className='onItem-cart'>
                       <img className='onItem-cart-logo' src={logo} />
