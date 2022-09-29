@@ -11,6 +11,7 @@ export default class InCartItem extends Component {
         const itemId = this.props.itemId
         const attributes = this.props.cartItem.product.attributes
         const id = this.props.cartItem.product.id
+        const item = this.props.cartItem
         const name = this.props.cartItem.product.name
         const price = this.props.cartItem.price
         const pictureURL = this.props.cartItem.product.gallery[0]
@@ -26,8 +27,8 @@ export default class InCartItem extends Component {
               {price}
               {attributesElements}
               <img width="50px"src={pictureURL}/>
-              <button onClick={()=>changeQuantity(id,"increase")}>+</button>
-              <button onClick={()=>changeQuantity(id,"decrease")}>-</button>
+              <button onClick={()=>changeQuantity(id,item,"increase")}>+</button>
+              <button onClick={()=>changeQuantity(id,item,"decrease")}>-</button>
             </div>
         )
       }}

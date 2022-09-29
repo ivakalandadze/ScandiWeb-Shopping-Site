@@ -52,40 +52,36 @@ export default class CartProvider extends Component {
                   choosenAttributes[attribute.id] = attribute.items[0]
                 })
               } 
-              const defaultAttributes = {...choosenAttributes}
               this.setState(prevState=>({
               cartItems:[...prevState.cartItems, {[id]:{
                 "count": 1,
                 product,
                 price,
                 choosenAttributes,
-                defaultAttributes
               }}]
             }))
           })
     }
 
     addItemtoCart = (item,price) => {
-      
       const existingItem = this.state.cartItems.find(prevItem=>Object.keys(prevItem)[0]===item.id)
-      // &&existingItem[item.id].choosenAtributes===existingItem[item.id].defaultAttributes
       if(existingItem){
           if(JSON.stringify(item.choosenAttributes)!==JSON.stringify(existingItem[item.id].choosenAttributes)){
-            
             this.getProducts(item.id, price, item.choosenAttributes)
-          }
+          }else {
           const prevItems = [...this.state.cartItems]
           const index = this.state.cartItems.indexOf(existingItem)
           prevItems[index][item.id]["count"] ++
           this.setState({cartItems: prevItems})
+          }
       }else {
         this.getProducts(item.id, price, item.choosenAttributes)
       }
     }
 
-    changeQuantity = (id,command) => {
+    changeQuantity = (id,item,command) => {
       this.state.cartItems.map((cartItem,index)=>{
-        if(Object.keys(cartItem)[0]===id){
+        if(Object.keys(cartItem)[0]===id && JSON.stringify(cartItem[id].choosenAttributes)==JSON.stringify(item.choosenAttributes)){
           const newQuantity = [...this.state.cartItems]
           if(command==="increase"){
             newQuantity[index][id].count += 1
@@ -97,9 +93,13 @@ export default class CartProvider extends Component {
       })
     }
     
-    changeAttributeInCart = (id, attributeId, itemId) => {
+    changeAttributeInCart = (productItem,id, attributeId, itemId) => {
+      console.log(productItem)
+      console.log("atributis shecvla")
       const prevCartItems=[...this.state.cartItems]
-      const index = prevCartItems.findIndex(cartItem=>Object.keys(cartItem)[0]===id)
+      const index = prevCartItems.findIndex(cartItem=>Object.keys(cartItem)[0]===id&&
+      JSON.stringify(productItem.choosenAttributes)
+      ===JSON.stringify(cartItem[id].choosenAttributes))
       const attributeIndex = prevCartItems[index][id].product.attributes.findIndex(attribute=>attribute.id===attributeId)
       const newItem = prevCartItems[index][id].product.attributes[attributeIndex].items[itemId]
       prevCartItems[index][id].choosenAttributes[attributeId] = newItem
