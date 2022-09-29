@@ -47,7 +47,7 @@ export default class CartProvider extends Component {
             .then(result=>{
               const product = {...result.data.product}
               const choosenAttributes = attributes ? attributes : {}
-             if(!attributes) {
+              if(!attributes) {
                 product.attributes.forEach(attribute=>{
                   choosenAttributes[attribute.id] = attribute.items[0]
                 })
@@ -66,25 +66,20 @@ export default class CartProvider extends Component {
     }
 
     addItemtoCart = (item,price) => {
-      console.log(item)
+      
       const existingItem = this.state.cartItems.find(prevItem=>Object.keys(prevItem)[0]===item.id)
       // &&existingItem[item.id].choosenAtributes===existingItem[item.id].defaultAttributes
       if(existingItem){
-        console.log(existingItem[item.id].choosenAttributes)
-        console.log(existingItem[item.id].defaultAttributes)
-          console.log(existingItem[item.id].choosenAttributes===existingItem[item.id].defaultAttributes)
-          const attributesMatch = existingItem[item.id].choosenAttributes===existingItem[item.id].defaultAttributes
+          if(JSON.stringify(item.choosenAttributes)!==JSON.stringify(existingItem[item.id].choosenAttributes)){
+            
+            this.getProducts(item.id, price, item.choosenAttributes)
+          }
           const prevItems = [...this.state.cartItems]
           const index = this.state.cartItems.indexOf(existingItem)
           prevItems[index][item.id]["count"] ++
           this.setState({cartItems: prevItems})
       }else {
-        if(item.choosenAttributes!==item.defaultAttributes){
-          console.log("ar emtxveva")
-          this.getProducts(item.id,price,item.choosenAttributes)
-        }
-        console.log("not exists")
-        this.getProducts(item.id,price)
+        this.getProducts(item.id, price, item.choosenAttributes)
       }
     }
 
