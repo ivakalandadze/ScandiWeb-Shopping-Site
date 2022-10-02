@@ -64,6 +64,7 @@ export default class CartProvider extends Component {
     }
 
     addItemtoCart = (item,price) => {
+      console.log(item.choosenAttributes)
       const existingItem = this.state.cartItems.find(prevItem=>Object.keys(prevItem)[0]===item.id)
       if(existingItem){
           if(JSON.stringify(item.choosenAttributes)!==JSON.stringify(existingItem[item.id].choosenAttributes)){
@@ -94,12 +95,9 @@ export default class CartProvider extends Component {
     }
     
     changeAttributeInCart = (productItem,id, attributeId, itemId) => {
-      console.log(productItem)
-      console.log("atributis shecvla")
       const prevCartItems=[...this.state.cartItems]
-      const index = prevCartItems.findIndex(cartItem=>Object.keys(cartItem)[0]===id&&
-      JSON.stringify(productItem.choosenAttributes)
-      ===JSON.stringify(cartItem[id].choosenAttributes))
+      const index = prevCartItems.findIndex(cartItem=>Object.keys(cartItem)[0]===id &&
+       JSON.stringify(productItem.choosenAttributes)===JSON.stringify(cartItem[id].choosenAttributes))
       const attributeIndex = prevCartItems[index][id].product.attributes.findIndex(attribute=>attribute.id===attributeId)
       const newItem = prevCartItems[index][id].product.attributes[attributeIndex].items[itemId]
       prevCartItems[index][id].choosenAttributes[attributeId] = newItem

@@ -17,19 +17,7 @@ class ProductDetails extends Component {
   }
   componentDidMount(){
     this.getProducts(this.props.params.id)
-
   }
-  // componentDidUpdate(prevProps, prevState){
-  //     if(prevState.localCurrency!==""){
-  //     if(this.state.product.prices){
-  //       this.state.product.prices.map(price=>{
-  //         if(price.currency.label===this.state.localCurrency){
-  //           this.setState({price: `${price.currency.symbol}${price.amount}`})
-  //         }
-  //       })
-  //     }
-  //   }
-  // }
   
   getProducts = (id) =>{
     client
@@ -117,11 +105,14 @@ class ProductDetails extends Component {
 
 class ProductInfo extends Component {
   state = {
-    price: ""
+    price: "",
+    mainPhoto: "",
+    photos: []
   }
 
   componentDidMount(){
    this.setPrice()
+   this.setPhotos()
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -139,7 +130,18 @@ class ProductInfo extends Component {
       })
     }
   }
+
+  setPhotos = () => {
+    this.setState({mainPhoto: this.props.product.gallery[0]})
+    this.setState({photos: this.props.product.gallery})
+  }
+
+  chooseMainPhoto = (index) => {
+    console.log(this.state.photos[index])
+    this.setState({mainPhoto: this.state.photos[index]})
+  }
   render() {
+    console.log("rendered")
     const attributesElements = this.props.product.attributes ?  this.props.product.attributes.map(attribute=>{
       return (
         <div>
@@ -149,6 +151,10 @@ class ProductInfo extends Component {
       )
     }) : []
 
+    const imgElements = this.state.photos.map((photo,index)=>(
+      <button onClick={()=>this.chooseMainPhoto(index)}key={index}><img className='img' src={photo} width="70px" height="70px"/></button>
+    ))
+
     return (
       <div>
         <h1>{this.props.product.brand}</h1>
@@ -157,6 +163,9 @@ class ProductInfo extends Component {
             <h3>Price:</h3>
             <h3>{this.state.price}</h3>
             <button onClick={()=>this.props.addToCart(this.props.product, this.state.price)}>Add To Cart</button>
+            <div dangerouslySetInnerHTML={{ __html: this.props.product.description }} />
+            <button><img className='main-img' src={this.state.mainPhoto} width="200px" height="200px"/></button>
+            {imgElements}
       </div>
     )
   }
