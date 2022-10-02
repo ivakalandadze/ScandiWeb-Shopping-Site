@@ -106,7 +106,7 @@ class ProductDetails extends Component {
 class ProductInfo extends Component {
   state = {
     price: "",
-    mainPhoto: "",
+    mainPhoto: {photoUrl: "", index: 0},
     photos: []
   }
 
@@ -132,13 +132,13 @@ class ProductInfo extends Component {
   }
 
   setPhotos = () => {
-    this.setState({mainPhoto: this.props.product.gallery[0]})
+    this.setState({mainPhoto: {photoUrl: this.props.product.gallery[0], index: 0}})
     this.setState({photos: this.props.product.gallery})
   }
 
   chooseMainPhoto = (index) => {
     console.log(this.state.photos[index])
-    this.setState({mainPhoto: this.state.photos[index]})
+    this.setState({mainPhoto: {photoUrl:this.state.photos[index], index: index}})
   }
   render() {
     console.log("rendered")
@@ -152,20 +152,24 @@ class ProductInfo extends Component {
     }) : []
 
     const imgElements = this.state.photos.map((photo,index)=>(
-      <button onClick={()=>this.chooseMainPhoto(index)}key={index}><img className='img' src={photo} width="70px" height="70px"/></button>
+      <button className={index===this.state.mainPhoto.index ? "choosen-img" : "img"} onClick={()=>this.chooseMainPhoto(index)}key={index}><img src={photo} width="70px" height="70px"/></button>
     ))
 
     return (
-      <div>
-        <h1>{this.props.product.brand}</h1>
-            <h2>{this.props.product.name}</h2>
-            <div>{attributesElements}</div>
-            <h3>Price:</h3>
-            <h3>{this.state.price}</h3>
-            <button onClick={()=>this.props.addToCart(this.props.product, this.state.price)}>Add To Cart</button>
-            <div dangerouslySetInnerHTML={{ __html: this.props.product.description }} />
-            <button><img className='main-img' src={this.state.mainPhoto} width="200px" height="200px"/></button>
-            {imgElements}
+      <div className='product-info'>
+        <div className='product-images'>
+          {imgElements}
+        </div>
+        <img className='main-img' src={this.state.mainPhoto.photoUrl} width="500" height="auto"/>
+          <div className='info'>
+          <h1>{this.props.product.brand}</h1>
+          <h2>{this.props.product.name}</h2>
+          <div>{attributesElements}</div>
+          <h3>Price:</h3>
+          <h3>{this.state.price}</h3>
+          <button onClick={()=>this.props.product.inStock ? this.props.addToCart(this.props.product, this.state.price) : alert("Product not in stock")}>Add To Cart</button>
+        <div dangerouslySetInnerHTML={{ __html: this.props.product.description }} />
+        </div>
       </div>
     )
   }

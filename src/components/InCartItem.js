@@ -16,19 +16,30 @@ export default class InCartItem extends Component {
         const price = this.props.cartItem.price
         const pictureURL = this.props.cartItem.product.gallery[0]
         const count = this.props.cartItem.count
-        const attributesElements = attributes.map(attribute=>(
-            <Attribute productItem ={this.props.cartItem} itemId={itemId} attribute={attribute}/>
-           ));
+        const attributesElements = attributes.map(attribute=>{
+          return (
+            <div>
+              <h5>{`${attribute.name}:`}</h5>
+              <Attribute productItem ={this.props.cartItem} itemId={itemId} attribute={attribute}/>
+            </div>
+          )
+        });
         return (
             
-            <div>
-              {name}
-              {count}
-              {price}
-              {attributesElements}
-              <img width="50px"src={pictureURL}/>
-              <button onClick={()=>changeQuantity(id,item,"increase")}>+</button>
-              <button onClick={()=>changeQuantity(id,item,"decrease")}>-</button>
+            <div className='cart-item-container'>
+              <div className='cart-info-box'>
+                {name}
+                <b>{price}</b>
+                {attributesElements}
+              </div>
+              <div className='cart-img-box'>
+                <div className='amount-box'>
+                <button onClick={()=>changeQuantity(id,item,"increase")}>+</button>
+                {count}
+                <button onClick={()=>changeQuantity(id,item,"decrease")}>-</button>
+                </div>
+                <img width="200px" height="200px"src={pictureURL}/>
+              </div>
             </div>
         )
       }}

@@ -2,6 +2,8 @@ import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client
 import React, { Component } from 'react'
 import Header from './components/Header';
 import "./App.css"
+import "./ProductInfo.css"
+import "./InCartItem.css"
 import CurrencyProvider from './context/CurrencyContext';
 import ProductPage from './components/pages/ProductPage';
 import CartProvider from './context/CartContext';
@@ -50,6 +52,7 @@ export default class App extends Component {
             <Header 
             categorySelect={this.categorySelect} 
             categories={this.state.categories}
+            selectedCategory={this.state.selectedCategory}
             />
             <Routes>
               <Route path="/" 

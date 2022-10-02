@@ -13,8 +13,11 @@ export default class MiniCart extends Component {
             return <InCartItem itemId={id} cartItem={cartItem[id]}/>
           })
           return (
-            <div>
-              {cartItemElements}
+            <div className='cart-box'>
+              {cartItems.length>0 ? 
+                <div>{cartItemElements}</div> : 
+                <h1>Please add items to cart</h1>
+              }
             </div>
           )
         }}

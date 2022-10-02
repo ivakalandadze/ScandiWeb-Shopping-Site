@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 export default class Header extends Component {
 
   render() {
+    console.log(this.props.selectedCategory)
     
     return (
       <CartConsumer>
@@ -22,9 +23,10 @@ export default class Header extends Component {
           <CurrencyConsumer>
             {props=>{
               const {currencies, selectedCurrency, chooseCurrency} = props;
-              const categoryTags = this.props.categories.map((category, index)=>(
-                <button className='category' onClick={(event)=>this.props.categorySelect(event)} value={category.name}key={index}>{category.name.toUpperCase()}</button>
-            ))
+              const categoryTags = this.props.categories.map((category, index)=>{
+                console.log(category)
+                return <button className={category.name===this.props.selectedCategory ? "selected-category" : 'category'} onClick={(event)=>this.props.categorySelect(event)} value={category.name}key={index}>{category.name.toUpperCase()}</button>
+              })
         
             const currencyOptions = currencies.map(currency=>(
                 <option value={currency.label}>{currency.symbol} {currency.label}</option>

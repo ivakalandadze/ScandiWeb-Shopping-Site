@@ -1,0 +1,23 @@
+.cart-box {
+    width: 90%
+}
+.cart-item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
+    padding: 20px 0px;
+}
+.cart-img-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.amount-box {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
