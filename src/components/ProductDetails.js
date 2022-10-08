@@ -105,7 +105,8 @@ class ProductDetails extends Component {
 
 class ProductInfo extends Component {
   state = {
-    price: "",
+    price: 0,
+    priceSymbol: "",
     mainPhoto: {photoUrl: "", index: 0},
     photos: []
   }
@@ -125,7 +126,7 @@ class ProductInfo extends Component {
     if(this.props.product.prices){
       this.props.product.prices.map(price=>{
         if(price.currency.label===this.props.currency){
-          this.setState({price: `${price.currency.symbol}${price.amount}`})
+          this.setState({price: price.amount, priceSymbol: price.currency.symbol})
         }
       })
     }
@@ -141,7 +142,6 @@ class ProductInfo extends Component {
     this.setState({mainPhoto: {photoUrl:this.state.photos[index], index: index}})
   }
   render() {
-    console.log("rendered")
     const attributesElements = this.props.product.attributes ?  this.props.product.attributes.map(attribute=>{
       return (
         <div>
@@ -166,9 +166,9 @@ class ProductInfo extends Component {
           <h2>{this.props.product.name}</h2>
           <div>{attributesElements}</div>
           <h3>Price:</h3>
-          <h3>{this.state.price}</h3>
-          <button onClick={()=>this.props.product.inStock ? this.props.addToCart(this.props.product, this.state.price) : alert("Product not in stock")}>Add To Cart</button>
-        <div dangerouslySetInnerHTML={{ __html: this.props.product.description }} />
+          <h3>{this.state.priceSymbol}{this.state.price}</h3>
+          <button className="add-to-cart-button"onClick={()=>this.props.product.inStock ? this.props.addToCart(this.props.product, this.state.price, this.state.priceSymbol) : alert("Product not in stock")}>Add To Cart</button>
+        <div className='description' dangerouslySetInnerHTML={{ __html: this.props.product.description }} />
         </div>
       </div>
     )

@@ -16,17 +16,52 @@ export default class Attribute extends Component {
             const fromDetails = this.props.fromDetails
             const itemId = this.props.itemId
             const attributeOptions = items.map((item,index)=>{
-              return(
-              <button 
-                onClick={()=>fromDetails ? changeAttribute(id,index) : changeAttributeInCart(productItem,itemId, id, index)  }
-                className={productItem.choosenAttributes[id].displayValue===item.displayValue ? "choosen-attribute" : ""}
-              >
-                {
-                  type==="swatch" ? <div style={{backgroundColor:`${item.value}`}}>{`${item.displayValue}`}</div> 
-                  : type==="text" ? <div>{`${item.displayValue}`}</div> 
-                  : <></>
+                if(productItem.choosenAttributes[id].displayValue===item.displayValue){
+                  if(type==="swatch"){
+                    return (<button
+                      onClick={()=>fromDetails ? changeAttribute(id,index) : changeAttributeInCart(productItem,itemId, id, index)}
+                      className="choosen-swatch-attribute"
+                      style={{backgroundColor:`${item.displayValue}`}}
+                    />)
+                  }else{
+                    return (<button
+                      onClick={()=>fromDetails ? changeAttribute(id,index) : changeAttributeInCart(productItem,itemId, id, index)}
+                      className="choosen-text-attribute"
+                    >
+                      {`${item.displayValue}`}
+                    </button>)
+                  }
+                }else{
+                  if(type==="swatch"){
+                    return (<button
+                      onClick={()=>fromDetails ? changeAttribute(id,index) : changeAttributeInCart(productItem,itemId, id, index)}
+                      className="swatch-attribute"
+                      style={{backgroundColor:`${item.displayValue}`}}
+                    />)
+                  }else{
+                    return (<button
+                      onClick={()=>fromDetails ? changeAttribute(id,index) : changeAttributeInCart(productItem,itemId, id, index)}
+                      className="text-attribute"
+                    >
+                      {`${item.displayValue}`}
+                    </button>)
+                  }
                 }
-              </button>)
+
+              // return(
+              // <button 
+              //   onClick={()=>fromDetails ? changeAttribute(id,index) : changeAttributeInCart(productItem,itemId, id, index)  }
+              //   // className={productItem.choosenAttributes[id].displayValue===item.displayValue ?  "choosen-attribute" : "attribute"}
+              //   className={`${type}-${productItem.choosenAttributes[id].displayValue===item.displayValue ?  "choosen-attribute" : "attribute"}`}
+                  
+
+              // >
+              //   {
+              //     type==="swatch" ? <div classname="attribute-div" style={{backgroundColor:`${item.displayValue}`}}></div> 
+              //     : type==="text" ? <div classname="attribute-div">{`${item.displayValue}`}</div> 
+              //     : <></>
+              //   }
+              // </button>)
             }
         )
             return(

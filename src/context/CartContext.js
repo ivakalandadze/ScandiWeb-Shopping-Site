@@ -17,7 +17,7 @@ export default class CartProvider extends Component {
 
     
 
-    getProducts = (id,price,attributes) =>{
+    getProducts = (id,price, symbol, attributes) =>{
       client
             .query({
                 query: gql`
@@ -26,6 +26,7 @@ export default class CartProvider extends Component {
                     name
                     id
                     gallery
+                    brand
                     description
                     attributes {
                       id
@@ -45,6 +46,7 @@ export default class CartProvider extends Component {
                 }
             })
             .then(result=>{
+              console.log("axlis damateba")
               const product = {...result.data.product}
               const choosenAttributes = attributes ? attributes : {}
               if(!attributes) {
@@ -57,18 +59,19 @@ export default class CartProvider extends Component {
                 "count": 1,
                 product,
                 price,
-                choosenAttributes,
+                symbol,
+                choosenAttributes
               }}]
             }))
           })
     }
 
-    addItemtoCart = (item,price) => {
-      console.log(item.choosenAttributes)
+    addItemtoCart = (item,price,symbol) => {
       const existingItem = this.state.cartItems.find(prevItem=>Object.keys(prevItem)[0]===item.id)
+      console.log(item)
       if(existingItem){
-          if(JSON.stringify(item.choosenAttributes)!==JSON.stringify(existingItem[item.id].choosenAttributes)){
-            this.getProducts(item.id, price, item.choosenAttributes)
+          if(item.choosenAttributes&&JSON.stringify(item.choosenAttributes)!==JSON.stringify(existingItem[item.id].choosenAttributes)){
+            this.getProducts(item.id, price, symbol, item.choosenAttributes)
           }else {
           const prevItems = [...this.state.cartItems]
           const index = this.state.cartItems.indexOf(existingItem)
@@ -76,7 +79,7 @@ export default class CartProvider extends Component {
           this.setState({cartItems: prevItems})
           }
       }else {
-        this.getProducts(item.id, price, item.choosenAttributes)
+        this.getProducts(item.id, price, symbol, item.choosenAttributes)
       }
     }
 

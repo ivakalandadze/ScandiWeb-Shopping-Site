@@ -7,7 +7,7 @@ import "./InCartItem.css"
 import CurrencyProvider from './context/CurrencyContext';
 import ProductPage from './components/pages/ProductPage';
 import CartProvider from './context/CartContext';
-import MiniCart from './components/pages/MiniCart';
+import Cart from './components/pages/Cart';
 import { Route, Routes } from 'react-router-dom';
 import ProductDetails from './components/ProductDetails';
 
@@ -65,7 +65,7 @@ export default class App extends Component {
               
               <Route path="/cart"
                 element={
-                  <MiniCart />
+                  <Cart />
                 }
               />
               <Route path="/product/:id"

@@ -14,7 +14,8 @@ const client = new ApolloClient({
 export default class Product extends Component {
 
   state ={
-    price : "",
+    price : 0,
+    priceSymbol : "",
     onIt: false,
     item: []
   }
@@ -39,7 +40,7 @@ export default class Product extends Component {
   setCurrency = () => {
     this.props.prices.map((price)=>{
       if(price.currency.label===this.props.selectedCurrency){
-        this.setState({price:`${price.currency.symbol}${price.amount}`})
+        this.setState({price:price.amount, priceSymbol: `${price.currency.symbol}`})
       } 
     })
   }
@@ -63,13 +64,13 @@ export default class Product extends Component {
                     </Link>
                     {this.state.onIt ? 
                     <button onClick={()=>!item.inStock ?  alert("Item out of stock") : 
-                      addItemtoCart(item, this.state.price)}
+                      addItemtoCart(item, this.state.price, this.state.priceSymbol)}
                       className='onItem-cart'>
                       <img className='onItem-cart-logo' src={logo} />
                     </button> : <Fragment></Fragment>}
                     <div className='isa'>
                       <h4 className="product-name">{item.name}</h4>
-                      <p>{this.state.price}</p>
+                      <p>{`${this.state.priceSymbol}${this.state.price}`}</p>
                     </div>
                 </div>
               )

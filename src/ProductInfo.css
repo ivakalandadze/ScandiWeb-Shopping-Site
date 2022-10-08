@@ -38,3 +38,25 @@
     cursor: pointer;
 }
 
+.add-to-cart-button{
+    width: 292px;
+    height: 52px;
+    cursor: pointer;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 120%;
+    background-color: orange;
+    border: none;
+}
+
+.description {
+    margin: 30px 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 159.96%;
+}
+

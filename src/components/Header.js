@@ -13,24 +13,23 @@ export default class Header extends Component {
       <CartConsumer>
         {cart=>{
           const {cartItems} = cart
-          const countQuantity = () => {
-            let quantity = 0
-            cartItems.map(cartItem=>{
-              quantity += cartItem.count
-            })
-          }
+          let quantity = 0
+          cartItems.forEach(item => {
+            const id = Object.keys(item)[0]
+            quantity+=item[id].count
+          });
           return(
           <CurrencyConsumer>
             {props=>{
               const {currencies, selectedCurrency, chooseCurrency} = props;
               const categoryTags = this.props.categories.map((category, index)=>{
-                console.log(category)
                 return <button className={category.name===this.props.selectedCategory ? "selected-category" : 'category'} onClick={(event)=>this.props.categorySelect(event)} value={category.name}key={index}>{category.name.toUpperCase()}</button>
               })
         
             const currencyOptions = currencies.map(currency=>(
                 <option value={currency.label}>{currency.symbol} {currency.label}</option>
             ))
+
               return (
                 <div className='header-box'> 
                     <Link to="/" className='link-text'>
@@ -47,7 +46,7 @@ export default class Header extends Component {
                           {currencyOptions}
                           </select>
                           <div className='mini-cart-button'>
-                              {cartItems.length>0 ? <div className='item-quantity'>{cartItems.length}</div> : <></>}
+                              {cartItems.length>0 ? <div className='item-quantity'>{quantity}</div> : <></>}
                               <button className='cart-icon-button'><Link to="/cart"><img className='cart-icon' src={logo}/></Link></button>
                           </div>
                       </div>
