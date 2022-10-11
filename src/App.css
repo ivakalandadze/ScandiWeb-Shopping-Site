@@ -17,6 +17,12 @@
     background-color: white;
 }
 
+.bag-logo {
+    position: fixed;
+    top: 10px;
+    left: 50%
+}
+
 .category {
     cursor: pointer;
     border: none;

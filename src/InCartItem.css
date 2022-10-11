@@ -212,3 +212,14 @@
     font-size: 14px;
     line-height: 120%;
 }
+
+.no-items {
+    text-align: center;
+    text-align: center;
+    padding: 20px;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+}

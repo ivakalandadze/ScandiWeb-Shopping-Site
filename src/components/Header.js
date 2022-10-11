@@ -36,7 +36,7 @@ export default class Header extends Component {
                           {categoryTags}
                       </div>
                     </Link> 
-                      <img src={bag} width="41" height="41"/>
+                      <img className="bag-logo"src={bag} width="41" height="41"/>
                       <div className={`${cartItems.length>0?"cart-currency": "cart-currency-zero"}`}>
                           <select
                           className='currency-select'
