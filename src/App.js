@@ -4,12 +4,14 @@ import Header from './components/Header';
 import "./App.css"
 import "./ProductInfo.css"
 import "./InCartItem.css"
+import "./MiniCart.css"
 import CurrencyProvider from './context/CurrencyContext';
 import ProductPage from './components/pages/ProductPage';
 import CartProvider from './context/CartContext';
 import Cart from './components/pages/Cart';
 import { Route, Routes } from 'react-router-dom';
 import ProductDetails from './components/ProductDetails';
+import MiniCart from "./components/pages/MiniCart"
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/',
@@ -19,6 +21,7 @@ export default class App extends Component {
   state = {
     selectedCategory: "all",
     categories: [],
+    miniCart: false
   }
   componentDidMount(){
      this.getCategories()
@@ -43,6 +46,12 @@ export default class App extends Component {
       this.setState({selectedCategory: event.target.value})
     }
 
+    toogleMiniCart = (page) => {
+      this.setState(prevState=>{
+        return {miniCart:!prevState.miniCart}
+      })
+    }
+
 
   render() {
     return (
@@ -53,7 +62,9 @@ export default class App extends Component {
             categorySelect={this.categorySelect} 
             categories={this.state.categories}
             selectedCategory={this.state.selectedCategory}
+            toogleMiniCart={this.toogleMiniCart}
             />
+            <MiniCart toogleMiniCart={this.toogleMiniCart} miniCart={this.state.miniCart}/>
             <Routes>
               <Route path="/" 
                 element={

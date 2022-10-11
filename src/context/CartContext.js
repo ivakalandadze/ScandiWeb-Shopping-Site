@@ -46,7 +46,6 @@ export default class CartProvider extends Component {
                 }
             })
             .then(result=>{
-              console.log("axlis damateba")
               const product = {...result.data.product}
               const choosenAttributes = attributes ? attributes : {}
               if(!attributes) {
@@ -68,7 +67,6 @@ export default class CartProvider extends Component {
 
     addItemtoCart = (item,price,symbol) => {
       const existingItem = this.state.cartItems.find(prevItem=>Object.keys(prevItem)[0]===item.id)
-      console.log(item)
       if(existingItem){
           if(item.choosenAttributes&&JSON.stringify(item.choosenAttributes)!==JSON.stringify(existingItem[item.id].choosenAttributes)){
             this.getProducts(item.id, price, symbol, item.choosenAttributes)

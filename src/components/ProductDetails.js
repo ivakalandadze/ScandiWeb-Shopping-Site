@@ -146,7 +146,7 @@ class ProductInfo extends Component {
       return (
         <div>
           <h3>{attribute.id}</h3>
-          <Attribute changeAttribute={this.props.changeAttribute} fromDetails={true} productItem={this.props.product} itemId={this.props.itemId} attribute={attribute}/>
+          <Attribute class="cart" changeAttribute={this.props.changeAttribute} fromDetails={true} productItem={this.props.product} itemId={this.props.itemId} attribute={attribute}/>
         </div>
       )
     }) : []

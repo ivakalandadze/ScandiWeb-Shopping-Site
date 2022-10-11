@@ -72,7 +72,10 @@ export default class ProductPage extends Component {
     ))
     
     return (
-      <div className='product-list'>{categoryProducts}</div>
+      <div className='product-list'>
+        {categoryProducts}
+        {this.props.pageState==="miniCart" ? <h1>MiniCart</h1> : <></>}
+        </div>
     )
   }
 }

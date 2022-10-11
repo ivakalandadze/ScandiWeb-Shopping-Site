@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 export default class Header extends Component {
 
   render() {
-    console.log(this.props.selectedCategory)
-    
     return (
       <CartConsumer>
         {cart=>{
@@ -47,7 +45,9 @@ export default class Header extends Component {
                           </select>
                           <div className='mini-cart-button'>
                               {cartItems.length>0 ? <div className='item-quantity'>{quantity}</div> : <></>}
-                              <button className='cart-icon-button'><Link to="/cart"><img className='cart-icon' src={logo}/></Link></button>
+                              <button onClick={()=>this.props.toogleMiniCart()} className='cart-icon-button'>
+                                  <img className='cart-icon' src={logo}/>
+                              </button>
                           </div>
                       </div>
                 </div>

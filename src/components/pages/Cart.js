@@ -10,7 +10,7 @@ export default class Cart extends Component {
           const {cartItems} = props;
           const cartItemElements = cartItems.map(cartItem=>{
             const id = Object.keys(cartItem)[0]
-            return <InCartItem itemId={id} cartItem={cartItem[id]}/>
+            return <InCartItem class="cart" itemId={id} cartItem={cartItem[id]}/>
           })
           let totalCost = 0
           cartItems.forEach(item => {
@@ -29,6 +29,7 @@ export default class Cart extends Component {
             <div className='cart-box'>
               {cartItems.length>0 ? 
                 <div>
+                  <h2 className='cart-header'>CART</h2>
                   {cartItemElements}
                   <div className='checkout-box'>
                     <p className="checkout-info">Tax 18%: {tax.toFixed(2)}</p>

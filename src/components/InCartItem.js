@@ -21,27 +21,27 @@ export default class InCartItem extends Component {
           const atrName = attribute.name.toUpperCase()
           return (
             <div>
-              <h5 className='attribute-name'>{`${atrName}:`}</h5>
-              <Attribute productItem ={this.props.cartItem} itemId={itemId} attribute={attribute}/>
+              <h5 className={`${this.props.class}-attribute-name`}>{`${atrName}:`}</h5>
+              <Attribute class={this.props.class} productItem ={this.props.cartItem} itemId={itemId} attribute={attribute}/>
             </div>
           )
         });
         return (
             
-            <div className='cart-item-container'>
-              <div className='cart-info-box'>
-                <h3 className='brand'>{brand}</h3>
-                <p className='name'>{name}</p>
-                <h4 className='price'>{price}</h4>
+            <div className={`${this.props.class}-item-container`}>
+              <div className={`${this.props.class}-info-box`}>
+                <h3 className={`${this.props.class}-brand`}>{brand}</h3>
+                <p className={`${this.props.class}-name`}>{name}</p>
+                <h4 className={`${this.props.class}-price`}>{price}</h4>
                 {attributesElements}
               </div>
-              <div className='cart-img-box'>
-                <div className='amount-box'>
-                  <button className="quantity-button"onClick={()=>changeQuantity(id,item,"increase")}>+</button>
-                  <p className="count">{count}</p>
-                  <button className="quantity-button"onClick={()=>changeQuantity(id,item,"decrease")}>-</button>
+              <div className={`${this.props.class}-img-box`}>
+                <div className={`${this.props.class}-amount-box`}>
+                  <button className={`${this.props.class}-quantity-button`}onClick={()=>changeQuantity(id,item,"increase")}>+</button>
+                  <p className={`${this.props.class}-count`}>{count}</p>
+                  <button className={`${this.props.class}-quantity-button`}onClick={()=>changeQuantity(id,item,"decrease")}>-</button>
                 </div>
-                <img width="200px" height="200px"src={pictureURL}/>
+                <img className={`${this.props.class}-product-img`}width="200px" height="200px"src={pictureURL}/>
               </div>
             </div>
         )
