@@ -15,6 +15,16 @@ export default class CartProvider extends Component {
         cartItems: []
     }
 
+    // componentDidUpdate(prevProps, prevState){
+    //   prevState.cartItems.map((item,index)=>{
+    //     const itemId = Object.keys(item)[0]
+    //     console.log(prevState.cartItems[index][itemId].count)
+    //     console.log(this.state.cartItems[index][itemId].count)
+    //     if(prevState.cartItems[index][itemId].count != this.state.cartItems[index][itemId].count){
+    //       console.log("rac saknelia kna")
+    //     }
+    //   })
+    // }
     
 
     getProducts = (id,price, symbol, attributes) =>{
@@ -89,6 +99,9 @@ export default class CartProvider extends Component {
             newQuantity[index][id].count += 1
           }else if(command==="decrease") {
             newQuantity[index][id].count -= 1
+            if(newQuantity[index][id].count<=0){
+              newQuantity.splice(index,1)
+            }
           }
           this.setState({cartItems: newQuantity})
         }

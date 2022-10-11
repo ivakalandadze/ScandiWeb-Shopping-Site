@@ -14,6 +14,11 @@ export default class MiniCart extends Component {
             const id = Object.keys(cartItem)[0]
             return <InCartItem class="mini-cart" itemId={id} cartItem={cartItem[id]}/>
           })
+          let quantity = 0
+          cartItems.forEach(item => {
+            const id = Object.keys(item)[0]
+            quantity+=item[id].count
+          });
           let totalCost = 0
           cartItems.forEach(item => {
             const id = Object.keys(item)[0]
@@ -25,13 +30,17 @@ export default class MiniCart extends Component {
                 <div className='ovarlay'></div>
                 {cartItems.length>0 ? 
                   <div className='mini-cart'>
+                    <h3 className='mini-cart-header'>My Bag, {quantity} items</h3>
                       {cartItemElements}
                       <div className='mini-cart-checkout'>
-                        <Link to="/cart"><button className="view-bag-button"onClick={this.props.toogleMiniCart}>VIEW BAG</button></Link>
+                        <Link to="/cart"><button className="view-bag-button" onClick={this.props.toogleMiniCart}>VIEW BAG</button></Link>
                         <button className="check-out-button" onClick={()=>alert("Order has been placed")}>CHECK OUT</button>
                       </div>
                   </div> : 
-                  <h1>Please add items to cart</h1>
+                  <div className='no-item-box'>
+                    <h1 className='no-items-mini-header'>No Items in Cart</h1>
+                    <button className="back-to-shopping-button" onClick={this.props.toogleMiniCart}>Back to Shopping</button>
+                  </div>
                 }
               </div>,
               document.getElementById('portal')

@@ -26,7 +26,7 @@ export default class Attribute extends Component {
                   }else{
                     return (<button
                       onClick={()=>fromDetails ? changeAttribute(id,index) : changeAttributeInCart(productItem,itemId, id, index)}
-                      className={`${this.props.class}-choosen-text-attribute`}
+                      className={id==="Capacity" ? `${this.props.class}-capacity-choosen-text-attribute`:`${this.props.class}-choosen-text-attribute`}
                     >
                       {`${item.value}`}
                     </button>)
@@ -41,7 +41,7 @@ export default class Attribute extends Component {
                   }else{
                     return (<button
                       onClick={()=>fromDetails ? changeAttribute(id,index) : changeAttributeInCart(productItem,itemId, id, index)}
-                      className={`${this.props.class}-text-attribute`}
+                      className={id==="Capacity" ? `${this.props.class}-capacity-text-attribute` : `${this.props.class}-text-attribute`}
                     >
                       {`${item.value}`}
                     </button>)

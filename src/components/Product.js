@@ -69,8 +69,8 @@ export default class Product extends Component {
                       <img className='onItem-cart-logo' src={logo} />
                     </button> : <Fragment></Fragment>}
                     <div className='isa'>
-                      <h4 className="product-name">{item.name}</h4>
-                      <p>{`${this.state.priceSymbol}${this.state.price}`}</p>
+                      <h4 className="product-name">{item.brand} {item.name}</h4>
+                      <p className='product-price'>{`${this.state.priceSymbol}${this.state.price}`}</p>
                     </div>
                 </div>
               )

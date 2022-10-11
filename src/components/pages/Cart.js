@@ -38,7 +38,7 @@ export default class Cart extends Component {
                     <button onClick={()=>alert("Order has been placed")}className='order-button'>Order</button>
                   </div>
                 </div> : 
-                <h1>Please add items to cart</h1>
+                <h1 className='no-items'>Please add items to cart</h1>
               }
             </div>
           )

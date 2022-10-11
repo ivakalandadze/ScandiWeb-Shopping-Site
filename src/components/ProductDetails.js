@@ -138,14 +138,13 @@ class ProductInfo extends Component {
   }
 
   chooseMainPhoto = (index) => {
-    console.log(this.state.photos[index])
     this.setState({mainPhoto: {photoUrl:this.state.photos[index], index: index}})
   }
   render() {
     const attributesElements = this.props.product.attributes ?  this.props.product.attributes.map(attribute=>{
       return (
         <div>
-          <h3>{attribute.id}</h3>
+          <h3 className='product-attribute-name-info'>{attribute.id.toUpperCase()}:</h3>
           <Attribute class="cart" changeAttribute={this.props.changeAttribute} fromDetails={true} productItem={this.props.product} itemId={this.props.itemId} attribute={attribute}/>
         </div>
       )
@@ -162,11 +161,11 @@ class ProductInfo extends Component {
         </div>
         <img className='main-img' src={this.state.mainPhoto.photoUrl} width="500" height="auto"/>
           <div className='info'>
-          <h1>{this.props.product.brand}</h1>
-          <h2>{this.props.product.name}</h2>
+          <h1 className='product-brand-info'>{this.props.product.brand}</h1>
+          <h2 className='product-name-info'>{this.props.product.name}</h2>
           <div>{attributesElements}</div>
-          <h3>Price:</h3>
-          <h3>{this.state.priceSymbol}{this.state.price}</h3>
+          <h3 className='product-price-lable-info'>PRICE:</h3>
+          <h3 className='product-price-info'>{this.state.priceSymbol}{this.state.price}</h3>
           <button className="add-to-cart-button"onClick={()=>this.props.product.inStock ? this.props.addToCart(this.props.product, this.state.price, this.state.priceSymbol) : alert("Product not in stock")}>Add To Cart</button>
         <div className='description' dangerouslySetInnerHTML={{ __html: this.props.product.description }} />
         </div>

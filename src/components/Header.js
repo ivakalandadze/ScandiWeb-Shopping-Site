@@ -3,6 +3,7 @@ import logo from "./shopping-cart.jpg"
 import { CurrencyConsumer } from '../context/CurrencyContext'
 import { CartConsumer } from '../context/CartContext'
 import { Link } from 'react-router-dom'
+import bag from "./shopping-bag.png"
 
 export default class Header extends Component {
 
@@ -35,6 +36,7 @@ export default class Header extends Component {
                           {categoryTags}
                       </div>
                     </Link> 
+                      <img src={bag} width="41" height="41"/>
                       <div className={`${cartItems.length>0?"cart-currency": "cart-currency-zero"}`}>
                           <select
                           className='currency-select'
