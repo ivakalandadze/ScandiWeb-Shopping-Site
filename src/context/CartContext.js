@@ -15,18 +15,6 @@ export default class CartProvider extends Component {
         cartItems: []
     }
 
-    // componentDidUpdate(prevProps, prevState){
-    //   prevState.cartItems.map((item,index)=>{
-    //     const itemId = Object.keys(item)[0]
-    //     console.log(prevState.cartItems[index][itemId].count)
-    //     console.log(this.state.cartItems[index][itemId].count)
-    //     if(prevState.cartItems[index][itemId].count != this.state.cartItems[index][itemId].count){
-    //       console.log("rac saknelia kna")
-    //     }
-    //   })
-    // }
-    
-
     getProducts = (id,price, symbol, attributes) =>{
       client
             .query({
