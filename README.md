@@ -17,7 +17,7 @@ A shopping site, which recieves all the data from the backend server at [https:/
 - Ability to change the currency of the store to one of the available currencies
 
 ## Project Screen Shot(s)
-![](images/Screenshot%201.png)
+<img src="images/Screenshot1.png" >
 
 
 ## Installation and Setup Instructions
