@@ -45,6 +45,6 @@ This Project was writen from scratch in about 1 month (last 2 weeks very intensi
 
 Initially this Project was a test assignement, but I made some changes in deisgn. 
 
-This is my first big Project and also first time using GrapQL(must say terrific tool)
+This is my first big Project and also first time using GrapQL.
 
 At lastthe technologies implemented in this project are React, React-Router v6, JS, CSS. I chose to use the `create-react-app` boilerplate to minimize initial setup and invest more time in diving into weird technological rabbit holes. 
