@@ -16,8 +16,10 @@ A shopping site, which recieves all the data from the backend server at [https:/
 - The descriptions provided in HTML format are parsed and presented as HTML, not as plain text
 - Ability to change the currency of the store to one of the available currencies
 
-## Project Screen Shot(s)
-<img src="/images/Screenshot1.png">
+## Project Screen Shots
+<img src="/Images/Screenshot1.png" width="400px">
+<img src="/Images/Screenshot2.png" width="400px">
+<img src="/Images/Screenshot3.png" width="400px">
 
 
 ## Installation and Setup Instructions
